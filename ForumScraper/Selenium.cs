@@ -1,33 +1,74 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
 
 namespace ForumScraper
 {
     public class Selenium
     {
+        public List<Stock> StocksList { get; set; } = new List<Stock>();
+        public int PostsRemaining { get; set; }
 
-        public List<Stocks> getStocksList(string path, int posts, int numberOfPosts)
+        public int NumberOfPosts { get; set; }
+
+        public int CountPosts { get; set; }
+
+        public Selenium()
+        {
+
+        }
+
+        public void GetPostsRemaining(string path)
         {
             var chromeOptions = new ChromeOptions();
             chromeOptions.PageLoadStrategy = PageLoadStrategy.Eager;
             IWebDriver driver = new ChromeDriver(chromeOptions);
 
-            List<Stocks> stocksList = new List<Stocks>();
-            if (numberOfPosts != 0)
+            driver.Navigate().GoToUrl(path);
+            IWebElement element = driver.FindElement(By.ClassName("postsRemaining"));
+
+            string sEle = element.Text;
+
+            string pattern = @"\d";
+            Regex rg = new Regex(pattern);
+
+            MatchCollection numGroup = rg.Matches(sEle);
+
+            string numberString = "";
+            int i = 0;
+            while (i < numGroup.Count)
             {
-                numberOfPosts = posts - numberOfPosts;
-            }            
-            var i = posts;
-            //while (i < posts)
-            while (i > numberOfPosts)
+                numberString += numGroup[i].Value;
+                i++;
+            }
+
+
+            NumberOfPosts = int.Parse(numberString);
+
+            driver.Close();
+        }
+
+        public void GetStocksList(string path, int inputPostNumber)
+        {
+            var chromeOptions = new ChromeOptions();
+            chromeOptions.PageLoadStrategy = PageLoadStrategy.Eager;
+            IWebDriver driver = new ChromeDriver(chromeOptions);
+
+            List<Stock> stocksList = new List<Stock>();
+            if (inputPostNumber != 0)
             {
-                Stocks stock = new Stocks();
-                string page = "page-" + i.ToString();
+                PostsRemaining = NumberOfPosts - inputPostNumber;
+            }
+            else PostsRemaining = 0;
+
+            CountPosts = NumberOfPosts;
+
+            while (CountPosts > PostsRemaining)
+            {
+                Stock stock = new Stock();
+                string page = "page-" + CountPosts.ToString();
                 string uri = Path.Combine(path, page);
                 driver.Navigate().GoToUrl(uri);
                 IWebElement element;
@@ -63,45 +104,18 @@ namespace ForumScraper
                     stock.Text = element.Text;
                     if (stock.Name != null & stocksList.Contains(stock) == false)
                     {
-                        stocksList.Add(stock);
+                        StocksList.Add(stock);
                     }
 
                 }
                 catch (NoSuchElementException) { continue; }
-                finally { i--; }    
+                finally { CountPosts--; }
             }
-            driver.Close();
 
-            return stocksList;
+            driver.Close();
         }
 
-        public int getPostsRemaining(string path)
-        {
-            var chromeOptions = new ChromeOptions();
-            chromeOptions.PageLoadStrategy = PageLoadStrategy.Eager;
-            IWebDriver driver = new ChromeDriver(chromeOptions);
-
-            driver.Navigate().GoToUrl(path);
-            IWebElement element = driver.FindElement(By.ClassName("postsRemaining"));
-
-            string sEle = element.Text;
-
-            string pattern = @"\d";
-            Regex rg = new Regex(pattern);
-
-            MatchCollection numGroup = rg.Matches(sEle);
-
-            string numberString = "";
-            int i = 0;
-            while (i < numGroup.Count)
-            {
-                numberString += numGroup[i].Value;
-                i++;
-            }
-            driver.Close();
-            return int.Parse(numberString);
-        }
     }
 
-    
+
 }

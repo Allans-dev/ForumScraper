@@ -5,7 +5,7 @@ using MoreLinq;
 
 namespace ForumScraper
 {
-    public class Stocks
+    public class Stock
     {
         private int _timesRepeated = 0;
 
@@ -13,11 +13,11 @@ namespace ForumScraper
 
         public string Text { get; set; }
 
-        public int TimesRepeated { get=>_timesRepeated; set { _timesRepeated = value; } }
-        
+        public int TimesRepeated { get => _timesRepeated; set { _timesRepeated = value; } }
+
         public int TotalReturned { get; set; }
 
-        public List<Stocks> countEachStock(List<Stocks> stocksList)
+        public void CountEachStock(List<Stock> stocksList)
         {
             var q = stocksList.GroupBy(x => x.Name)
                         .Select(x => new {
@@ -28,7 +28,7 @@ namespace ForumScraper
 
             foreach (var x in q)
             {
-                foreach (Stocks s in stocksList)
+                foreach (Stock s in stocksList)
                 {
                     if (x.Name == s.Name && x.Name != null)
                     {
@@ -37,14 +37,13 @@ namespace ForumScraper
                 }
             }
             TotalReturned = q.Count();
-           return stocksList;
         }
 
-        public void DisplayStocks(List<Stocks> stocksList)
+        public void DisplayStocks(List<Stock> stocksList)
         {
             var unique = stocksList.DistinctBy(x => x.Name).ToList();
-            unique.Sort((x, y)=> {
-                return y.TimesRepeated.CompareTo(x.TimesRepeated);          
+            unique.Sort((x, y) => {
+                return y.TimesRepeated.CompareTo(x.TimesRepeated);
             });
 
             foreach (var u in unique)
@@ -56,7 +55,7 @@ namespace ForumScraper
                 }
 
             }
-            
+
         }
     }
 }

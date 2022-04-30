@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using CsvHelper;
 
 namespace ForumScraper
 {
@@ -11,39 +7,26 @@ namespace ForumScraper
         static void Main(string[] args)
         {
 
-            Console.WriteLine("Enter Forum URL: ");
-            string path = Console.ReadLine();
+            UI ui = new UI();
 
-            Console.WriteLine("Enter number of Posts: ");
-            Console.WriteLine("Enter {0} for all");
-            int numberOfPosts = int.Parse(Console.ReadLine());
+            Selenium sel = new Selenium();
 
-            Console.WriteLine("Enter File Name to be written: ");
-            string fileName = Console.ReadLine();
+            sel.GetPostsRemaining(ui.Path);
 
+            sel.GetStocksList(ui.Path, ui.InputPostsNumber);
 
-            Selenium s = new Selenium();
-            int posts = s.getPostsRemaining(path);
-            List<Stocks> stocksList = s.getStocksList(path, posts, numberOfPosts);
+            Stock stock = new Stock();
 
-            Stocks stock = new Stocks();
+            stock.CountEachStock(sel.StocksList);
 
-            List<Stocks> countedStocks = stock.countEachStock(stocksList);
+            stock.DisplayStocks(sel.StocksList);
 
-            stock.DisplayStocks(countedStocks);
-
-            string displayPosts = numberOfPosts == 0 ? posts.ToString() : numberOfPosts.ToString();
-
-            Console.WriteLine($" { stock.TotalReturned } out of { displayPosts } returned Stock Code");
+            Console.WriteLine($" { stock.TotalReturned } out of { sel.NumberOfPosts - sel.PostsRemaining } returned Stock Code");
 
             Console.ReadKey();
-           
-            using (var writer = new StreamWriter($"/Users/allancheung/OneDrive/ForumBreakdowns/{fileName}.csv"))
-            using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
-            {
-                csv.WriteRecords(stocksList);
-                csv.WriteComment($" { stock.TotalReturned } out of { displayPosts } returned Stock Code");
-            }
+
+            Writer writer = new Writer();
+            writer.WriteToFile(ui, sel, stock);
         }
 
     }
