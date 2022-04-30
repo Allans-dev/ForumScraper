@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "Lc1QkECxX40xQ2Ef+SCpmBqmPjbVBUKNkXrMzlLAlxOOJbMC2WhrRvHgbcx1bct7DBw368SXGIJfwnsmuwhk2w==",
+  "success": true,
+  "projectFilePath": "D:\\Programming\\ForumScraper\\ForumScraper.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\allan\\.nuget\\packages\\csvhelper\\27.2.1\\csvhelper.27.2.1.nupkg.sha512",
+    "C:\\Users\\allan\\.nuget\\packages\\morelinq\\3.3.2\\morelinq.3.3.2.nupkg.sha512",
+    "C:\\Users\\allan\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\allan\\.nuget\\packages\\selenium.webdriver\\4.1.1\\selenium.webdriver.4.1.1.nupkg.sha512",
+    "C:\\Users\\allan\\.nuget\\packages\\selenium.webdriver.chromedriver\\101.0.4951.4100\\selenium.webdriver.chromedriver.101.0.4951.4100.nupkg.sha512"
+  ],
+  "logs": []
+}

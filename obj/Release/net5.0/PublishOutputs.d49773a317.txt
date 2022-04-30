@@ -1,0 +1,9 @@
+C:\Users\allan\Desktop\ForumScraper.exe
+C:\Users\allan\Desktop\ForumScraper.dll
+C:\Users\allan\Desktop\ForumScraper.deps.json
+C:\Users\allan\Desktop\ForumScraper.runtimeconfig.json
+C:\Users\allan\Desktop\ForumScraper.pdb
+C:\Users\allan\Desktop\CsvHelper.dll
+C:\Users\allan\Desktop\MoreLinq.dll
+C:\Users\allan\Desktop\Newtonsoft.Json.dll
+C:\Users\allan\Desktop\WebDriver.dll
