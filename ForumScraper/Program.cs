@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using System;
 
 namespace ForumScraper
 {
@@ -9,11 +11,17 @@ namespace ForumScraper
 
             UI ui = new UI();
 
+            var chromeOptions = new ChromeOptions();
+            chromeOptions.PageLoadStrategy = PageLoadStrategy.Eager;
+            IWebDriver driver = new ChromeDriver(chromeOptions);
+
             Selenium sel = new Selenium();
 
-            sel.GetPostsRemaining(ui.Path);
+            sel.GetPostsRemaining(ui.Path, driver);
 
-            sel.GetStocksList(ui.Path, ui.InputPostsNumber);
+            sel.GetStocksList(ui.Path, ui.InputPostsNumber, driver);
+
+            driver.Close();
 
             Stock stock = new Stock();
 

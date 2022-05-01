@@ -2,7 +2,6 @@
 using System.IO;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 
 namespace ForumScraper
 {
@@ -20,11 +19,8 @@ namespace ForumScraper
 
         }
 
-        public void GetPostsRemaining(string path)
+        public void GetPostsRemaining(string path, IWebDriver driver)
         {
-            var chromeOptions = new ChromeOptions();
-            chromeOptions.PageLoadStrategy = PageLoadStrategy.Eager;
-            IWebDriver driver = new ChromeDriver(chromeOptions);
 
             driver.Navigate().GoToUrl(path);
             IWebElement element = driver.FindElement(By.ClassName("postsRemaining"));
@@ -47,14 +43,11 @@ namespace ForumScraper
 
             NumberOfPosts = int.Parse(numberString);
 
-            driver.Close();
+            
         }
 
-        public void GetStocksList(string path, int inputPostNumber)
+        public void GetStocksList(string path, int inputPostNumber, IWebDriver driver)
         {
-            var chromeOptions = new ChromeOptions();
-            chromeOptions.PageLoadStrategy = PageLoadStrategy.Eager;
-            IWebDriver driver = new ChromeDriver(chromeOptions);
 
             List<Stock> stocksList = new List<Stock>();
             if (inputPostNumber != 0)
@@ -112,7 +105,6 @@ namespace ForumScraper
                 finally { CountPosts--; }
             }
 
-            driver.Close();
         }
 
     }
