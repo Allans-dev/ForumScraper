@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
@@ -17,6 +18,29 @@ namespace ForumScraper
         public Selenium()
         {
 
+        }
+
+        public void GetUrls(IWebDriver driver)
+        {
+
+            driver.Navigate().GoToUrl("https://hotcopper.com.au/discussions/asx---day-trading/?post_view=0");
+            IReadOnlyCollection<IWebElement> elementCollection = driver.FindElements(By.ClassName("subject-td"));
+
+            Dictionary<string, string> urlDictionary = new Dictionary<string, string>();
+
+            foreach (IWebElement webElement in elementCollection)
+            {
+
+                string title = webElement.FindElement(By.TagName("strong")).FindElement(By.TagName("a")).GetAttribute("title");
+                Console.WriteLine(title);
+
+                string href = webElement.FindElement(By.TagName("strong")).FindElement(By.TagName("a")).GetAttribute("href");
+                Console.WriteLine(href);
+
+                urlDictionary.Add(title, href);
+
+            }
+            Console.WriteLine("Finished");
         }
 
         public void GetPostsRemaining(string path, IWebDriver driver)

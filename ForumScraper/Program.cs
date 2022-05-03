@@ -9,7 +9,7 @@ namespace ForumScraper
         static void Main(string[] args)
         {
 
-            UI ui = new UI();
+            //UI ui = new UI();
 
             var chromeOptions = new ChromeOptions();
             chromeOptions.PageLoadStrategy = PageLoadStrategy.Eager;
@@ -17,24 +17,26 @@ namespace ForumScraper
 
             Selenium sel = new Selenium();
 
-            sel.GetPostsRemaining(ui.Path, driver);
+            sel.GetUrls(driver);
 
-            sel.GetStocksList(ui.Path, ui.InputPostsNumber, driver);
+            //sel.GetPostsRemaining(ui.Path, driver);
+
+            //sel.GetStocksList(ui.Path, ui.InputPostsNumber, driver);
 
             driver.Close();
 
-            Stock stock = new Stock();
+            //Stock stock = new Stock();
 
-            stock.CountEachStock(sel.StocksList);
+            //stock.CountEachStock(sel.StocksList);
 
-            stock.DisplayStocks(sel.StocksList);
+            //stock.DisplayStocks(sel.StocksList);
 
-            Console.WriteLine($" { stock.TotalReturned } out of { sel.NumberOfPosts - sel.PostsRemaining } returned Stock Code");
+            //Console.WriteLine($" { stock.TotalReturned } out of { sel.NumberOfPosts - sel.PostsRemaining } returned Stock Code");
 
             Console.ReadKey();
 
-            Writer writer = new Writer();
-            writer.WriteToFile(ui, sel, stock);
+            //Writer writer = new Writer();
+            //writer.WriteToFile(ui, sel, stock);
         }
 
     }
