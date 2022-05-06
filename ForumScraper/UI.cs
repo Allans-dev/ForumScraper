@@ -14,15 +14,15 @@ namespace ForumScraper
         {
 
 
-            Console.WriteLine("Enter Forum URL: ");
-            Path = Console.ReadLine();
+            //Console.WriteLine("Enter Forum URL: ");
+            //Path = Console.ReadLine();
 
-            Console.WriteLine("Enter number of Posts: ");
-            Console.WriteLine("Enter {0} for all");
-            InputPostsNumber = int.Parse(Console.ReadLine()) | 0;
+            //Console.WriteLine("Enter number of Posts: ");
+            //Console.WriteLine("Enter {0} for all");
+            //InputPostsNumber = int.Parse(Console.ReadLine()) | 0;
 
-            Console.WriteLine("Please Enter File Name: ");
-            FileName = Console.ReadLine(); ;
+            //Console.WriteLine("Please Enter File Name: ");
+            //FileName = Console.ReadLine(); ;
         }
 
 

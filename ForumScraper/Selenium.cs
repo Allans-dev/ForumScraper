@@ -14,6 +14,8 @@ namespace ForumScraper
         public int NumberOfPosts { get; set; }
 
         public int CountPosts { get; set; }
+        public List<(string title, string url)> UrlTuples { get; set; } = new List<(string title, string url)>();
+        public string SelectedUrl { get; set; }
 
         public Selenium()
         {
@@ -22,31 +24,41 @@ namespace ForumScraper
 
         public void GetUrls(IWebDriver driver)
         {
-
             driver.Navigate().GoToUrl("https://hotcopper.com.au/discussions/asx---day-trading/?post_view=0");
             IReadOnlyCollection<IWebElement> elementCollection = driver.FindElements(By.ClassName("subject-td"));
 
-            Dictionary<string, string> urlDictionary = new Dictionary<string, string>();
+            var i = 0;
 
             foreach (IWebElement webElement in elementCollection)
             {
 
-                string title = webElement.FindElement(By.TagName("strong")).FindElement(By.TagName("a")).GetAttribute("title");
-                Console.WriteLine(title);
+                if (i < 10)
+                {
 
-                string href = webElement.FindElement(By.TagName("strong")).FindElement(By.TagName("a")).GetAttribute("href");
-                Console.WriteLine(href);
+                    IWebElement link = webElement.FindElement(By.TagName("strong")).FindElement(By.TagName("a"));
+                    string threadTitle = link.GetAttribute("title");
+                    string href = link.GetAttribute("href");
 
-                urlDictionary.Add(title, href);
+                    UrlTuples.Add((threadTitle, href));
 
+                    Console.WriteLine(UrlTuples[i].title);
+                    Console.WriteLine(UrlTuples[i].url);
+
+                    i++;
+                }
+   
             }
+
+            SelectedUrl = UrlTuples[0].url;
+
             Console.WriteLine("Finished");
+
         }
 
-        public void GetPostsRemaining(string path, IWebDriver driver)
+        public void GetPostsRemaining(IWebDriver driver)
         {
 
-            driver.Navigate().GoToUrl(path);
+            driver.Navigate().GoToUrl(SelectedUrl);
             IWebElement element = driver.FindElement(By.ClassName("postsRemaining"));
 
             string sEle = element.Text;
@@ -70,15 +82,18 @@ namespace ForumScraper
             
         }
 
-        public void GetStocksList(string path, int inputPostNumber, IWebDriver driver)
+        //public void GetStocksList(int inputPostNumber, IWebDriver driver)
+        public void GetStocksList(IWebDriver driver)
         {
 
             List<Stock> stocksList = new List<Stock>();
-            if (inputPostNumber != 0)
-            {
-                PostsRemaining = NumberOfPosts - inputPostNumber;
-            }
-            else PostsRemaining = 0;
+            //if (inputPostNumber != 0)
+            //{
+            //    PostsRemaining = NumberOfPosts - inputPostNumber;
+            //}
+            //else PostsRemaining = 0;
+
+            PostsRemaining = 0;
 
             CountPosts = NumberOfPosts;
 
@@ -86,7 +101,7 @@ namespace ForumScraper
             {
                 Stock stock = new Stock();
                 string page = "page-" + CountPosts.ToString();
-                string uri = Path.Combine(path, page);
+                string uri = Path.Combine(SelectedUrl, page);
                 driver.Navigate().GoToUrl(uri);
                 IWebElement element;
 
