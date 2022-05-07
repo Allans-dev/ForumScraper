@@ -35,11 +35,11 @@ namespace ForumScraper
             stock.DisplayStocks(sel.StocksList);
 
             Console.WriteLine($" { stock.TotalReturned } out of { sel.NumberOfPosts - sel.PostsRemaining } returned Stock Code");
-
+            Console.WriteLine("Finished");
             Console.ReadKey();
 
-            Writer writer = new Writer();
-            writer.WriteToFile(sel, stock);
+            //Writer writer = new Writer();
+            //writer.WriteToFile(sel, stock);
         }
 
     }

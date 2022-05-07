@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
 
@@ -50,8 +51,6 @@ namespace ForumScraper
             }
 
             SelectedUrl = UrlTuples[0].url;
-
-            Console.WriteLine("Finished");
 
         }
 
@@ -108,7 +107,9 @@ namespace ForumScraper
                 try
                 {
                     element = driver.FindElement(By.ClassName("message-text"));
-                    string[] strArr = element.Text.Split(" ");
+                    string[] strArr1 = element.Text.Split(" ");
+                    string[] strArr2 = element.Text.Split("\n");
+                    IEnumerable<string> strArr = strArr1.Concat(strArr2).ToArray().Distinct();
                     foreach (string str in strArr)
                     {
                         if (str.Trim().Length == 3)
