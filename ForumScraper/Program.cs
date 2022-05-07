@@ -14,7 +14,8 @@ namespace ForumScraper
 
             var chromeOptions = new ChromeOptions();
             chromeOptions.PageLoadStrategy = PageLoadStrategy.Eager;
-            chromeOptions.AddArgument("headless");            
+            chromeOptions.AddArgument("headless");
+            //chromeOptions.BinaryLocation = "/user/bin/google-chrome";
             IWebDriver driver = new ChromeDriver(chromeOptions);
 
             Selenium sel = new Selenium();

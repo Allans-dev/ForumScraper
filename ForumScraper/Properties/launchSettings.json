@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ForumScraper": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
