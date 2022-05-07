@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.810.16
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForumScraper", "ForumScraper\ForumScraper.csproj", "{A44EB2AA-073B-424A-AFFF-D3E8ACC5C65E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForumScraper", "ForumScraper\ForumScraper.csproj", "{A44EB2AA-073B-424A-AFFF-D3E8ACC5C65E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HCSeleniumAPI", "HCSeleniumAPI\HCSeleniumAPI.csproj", "{F28EDCA4-7054-435F-A5F4-F3BFDDC5C8EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{A44EB2AA-073B-424A-AFFF-D3E8ACC5C65E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A44EB2AA-073B-424A-AFFF-D3E8ACC5C65E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A44EB2AA-073B-424A-AFFF-D3E8ACC5C65E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F28EDCA4-7054-435F-A5F4-F3BFDDC5C8EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F28EDCA4-7054-435F-A5F4-F3BFDDC5C8EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F28EDCA4-7054-435F-A5F4-F3BFDDC5C8EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F28EDCA4-7054-435F-A5F4-F3BFDDC5C8EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
