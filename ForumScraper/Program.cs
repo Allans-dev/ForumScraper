@@ -17,6 +17,7 @@ namespace ForumScraper
             chromeOptions.AddArgument("headless");
             //chromeOptions.BinaryLocation = "/user/bin/google-chrome";
             IWebDriver driver = new ChromeDriver(chromeOptions);
+            //IWebDriver driver = new RemoteWebDriver(new Uri("http://localhost:4444"), chromeOptions);
 
             Selenium sel = new Selenium();
 
