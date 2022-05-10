@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using MoreLinq;
-
-namespace ForumScraper
+﻿namespace HCSeleniumAPI.Models
 {
     public class Stock
     {
         private int _timesRepeated = 0;
 
-        public string Name { get; set; }
+        internal string ?Name { get; set; }
 
-        public string Text { get; set; }
+        internal string ?Text { get; set; }
         //public int NumberOfUpvotes { get; set; }
 
         //public int NumberOfLightbulbs { get; set; }
