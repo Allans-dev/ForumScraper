@@ -27,6 +27,8 @@ namespace ForumScraper
 
             string selectedUrl = sel.UrlTuples[ui.InputPostNumber].url;
 
+            string selectedThread = sel.UrlTuples[ui.InputPostNumber].title;
+
             sel.GetPostsRemaining(driver, selectedUrl);
 
             sel.GetStocksList(driver, selectedUrl);
@@ -40,11 +42,21 @@ namespace ForumScraper
             stock.DisplayStocks(sel.StocksList);
 
             Console.WriteLine($" { stock.TotalReturned } out of { sel.NumberOfPosts - sel.PostsRemaining } returned Stock Code");
-            Console.WriteLine("Finished");
-            Console.ReadKey();
+            
 
-            //Writer writer = new Writer();
-            //writer.WriteToFile(sel, stock);
+            Console.WriteLine("Do you want to save to CSV? y/N");
+            string csvChoice = Console.ReadLine();
+            if(csvChoice == "Y" || csvChoice == "y")
+            {
+                Writer writer = new Writer();
+                writer.WriteToFile(sel, stock, selectedThread);
+
+                Console.WriteLine("Finished, saved to csv");
+            } else
+            {
+                Console.WriteLine("Finished, results not saved");
+            }
+
         }
 
     }

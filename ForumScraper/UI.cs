@@ -28,8 +28,9 @@ namespace ForumScraper
             }
             Console.WriteLine("");
             Console.WriteLine("Please input the number corresponding to the forum thread you would like to analyse:");
-            InputPostNumber = int.Parse(Console.ReadLine())-1 >= 0 && int.Parse(Console.ReadLine())-1 <= _urlTuples.Count ? 
-                int.Parse(Console.ReadLine())-1 : 0;
+            var input = Console.ReadLine();
+            InputPostNumber = int.Parse(input)-1 >= 0 && int.Parse(input)-1 <= _urlTuples.Count ? 
+                int.Parse(input)-1 : 10;
             //Console.WriteLine("Enter Forum URL: ");
             //Path = Console.ReadLine();
 
@@ -39,7 +40,6 @@ namespace ForumScraper
 
             //Console.WriteLine("Please Enter File Name: ");
             //FileName = Console.ReadLine(); ;
-            Console.ReadKey();
         }
     }
 }

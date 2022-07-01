@@ -44,15 +44,19 @@
                 return y.TimesRepeated.CompareTo(x.TimesRepeated);
             });
 
+            Console.WriteLine("========================================");
+
             foreach (var u in unique)
             {
-                Console.WriteLine($"{u.Name}  | {u.TimesRepeated} ");
+                Console.WriteLine($"{u.Name}  |  {u.TimesRepeated} ");
                 if (u.TimesRepeated >= 3)
                 {
-                    //Console.WriteLine(u.Text);
+                    Console.WriteLine(u.Text);
                 }
 
             }
+
+            Console.WriteLine("========================================");
 
         }
     }

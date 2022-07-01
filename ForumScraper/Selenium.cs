@@ -40,16 +40,11 @@ namespace ForumScraper
                     string href = link.GetAttribute("href");
 
                     UrlTuples.Add((threadTitle, href));
-
-                    //Console.WriteLine($"{i}. {UrlTuples[i].title}");
-                    // Console.WriteLine(UrlTuples[i].url);
-
                     i++;
                 }
    
             }
 
-            //SelectedUrl = UrlTuples[0].url;
             return UrlTuples;
         }
 
@@ -79,16 +74,10 @@ namespace ForumScraper
    
         }
 
-        //public void GetStocksList(int inputPostNumber, IWebDriver driver)
         public void GetStocksList(IWebDriver driver,string selectedUrl)
         {
 
             List<Stock> stocksList = new List<Stock>();
-            //if (inputPostNumber != 0)
-            //{
-            //    PostsRemaining = NumberOfPosts - inputPostNumber;
-            //}
-            //else PostsRemaining = 0;
 
             PostsRemaining = 0;
 

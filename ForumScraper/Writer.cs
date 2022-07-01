@@ -7,11 +7,10 @@ namespace ForumScraper
 {
     internal class Writer
     {
-        public void WriteToFile(Selenium sel, Stock stocks)
+        public void WriteToFile(Selenium sel, Stock stocks, string selectedThread)
         {
-            string filename = sel.UrlTuples[0].title;
 
-            using (var writer = new StreamWriter($"C:\\Users\\allan\\OneDrive\\ForumBreakdowns\\{filename}.csv"))
+            using (var writer = new StreamWriter($"C:\\Users\\allan\\OneDrive\\ForumBreakdowns\\{selectedThread}.csv"))
             using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
             {
                 csv.WriteRecords(sel.StocksList);
