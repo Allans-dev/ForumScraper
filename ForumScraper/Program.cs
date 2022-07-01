@@ -10,7 +10,7 @@ namespace ForumScraper
         static void Main(string[] args)
         {
 
-            //UI ui = new UI();
+            
 
             var chromeOptions = new ChromeOptions();
             chromeOptions.PageLoadStrategy = PageLoadStrategy.Eager;
@@ -20,12 +20,16 @@ namespace ForumScraper
             //IWebDriver driver = new RemoteWebDriver(new Uri("http://localhost:4444"), chromeOptions);
 
             Selenium sel = new Selenium();
-
             sel.GetUrls(driver);
 
-            sel.GetPostsRemaining(driver);
+            UI ui = new UI(sel.UrlTuples);
+            ui.GetSelectedUrl();
 
-            sel.GetStocksList(driver);
+            string selectedUrl = sel.UrlTuples[ui.InputPostNumber].url;
+
+            sel.GetPostsRemaining(driver, selectedUrl);
+
+            sel.GetStocksList(driver, selectedUrl);
 
             driver.Close();
 

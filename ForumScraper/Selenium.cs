@@ -16,14 +16,13 @@ namespace ForumScraper
 
         public int CountPosts { get; set; }
         public List<(string title, string url)> UrlTuples { get; set; } = new List<(string title, string url)>();
-        public string SelectedUrl { get; set; }
 
         public Selenium()
         {
 
         }
 
-        public void GetUrls(IWebDriver driver)
+        public List<(string title, string url)> GetUrls(IWebDriver driver)
         {
             driver.Navigate().GoToUrl("https://hotcopper.com.au/discussions/asx---day-trading/?post_view=0");
             IReadOnlyCollection<IWebElement> elementCollection = driver.FindElements(By.ClassName("subject-td"));
@@ -42,22 +41,22 @@ namespace ForumScraper
 
                     UrlTuples.Add((threadTitle, href));
 
-                    Console.WriteLine(UrlTuples[i].title);
-                    Console.WriteLine(UrlTuples[i].url);
+                    //Console.WriteLine($"{i}. {UrlTuples[i].title}");
+                    // Console.WriteLine(UrlTuples[i].url);
 
                     i++;
                 }
    
             }
 
-            SelectedUrl = UrlTuples[0].url;
-
+            //SelectedUrl = UrlTuples[0].url;
+            return UrlTuples;
         }
 
-        public void GetPostsRemaining(IWebDriver driver)
+        public void GetPostsRemaining(IWebDriver driver,string selectedUrl)
         {
 
-            driver.Navigate().GoToUrl(SelectedUrl);
+            driver.Navigate().GoToUrl(selectedUrl);
             IWebElement element = driver.FindElement(By.ClassName("postsRemaining"));
 
             string sEle = element.Text;
@@ -77,12 +76,11 @@ namespace ForumScraper
 
 
             NumberOfPosts = int.Parse(numberString);
-
-            
+   
         }
 
         //public void GetStocksList(int inputPostNumber, IWebDriver driver)
-        public void GetStocksList(IWebDriver driver)
+        public void GetStocksList(IWebDriver driver,string selectedUrl)
         {
 
             List<Stock> stocksList = new List<Stock>();
@@ -100,7 +98,7 @@ namespace ForumScraper
             {
                 Stock stock = new Stock();
                 string page = "page-" + CountPosts.ToString();
-                string uri = Path.Combine(SelectedUrl, page);
+                string uri = Path.Combine(selectedUrl, page);
                 driver.Navigate().GoToUrl(uri);
                 IWebElement element;
 
